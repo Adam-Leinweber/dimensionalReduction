@@ -1,0 +1,42 @@
+import re
+
+all_bkg_processes = ['njets','w_jets','gam_jets','z_jets','ttbar','wtopbar','wtop','ww','single_top','single_topbar','2gam','Wgam','zw','Zgam','zz','single_higgs','ttbarGam','ttbarZ','ttbarHiggs','atop','ttbarW','atopbar','ztop','ztopbar','4top','ttbarWW']
+
+background_path = '/path/to/LesHouches/csv/'
+N_bkg = 0
+
+for bkg_process in all_bkg_processes:
+    in_filename = background_path+bkg_process+'_10fb.csv'
+    out_filename = '../data/'+bkg_process+'_3lep_10fb.csv'
+
+    with open(in_filename,'r') as f_in, open(out_filename, 'w') as f_out:
+        i = 0
+        for line in f_in:
+            split_line = line.replace(';\n','')
+            split_line = re.split(';', split_line)
+            
+            N_leps = 0
+            N_jets = 0
+            try:
+                for element in split_line:
+                    element = re.split(',', element)                    
+                    if 'j' in element[0] and len(element) > 1:
+                        N_jets += 1
+                    if 'b' in element[0] and len(element) > 1:
+                        N_jets += 1
+                    if ('m+' in element[0] or 'm-' in element[0]) and len(element) > 1:
+                        N_leps += 1
+                    if ('e+' in element[0] or 'e-' in element[0]) and len(element) > 1:
+                        N_leps += 1
+            except:
+                print()
+                print('ERROR: Failed to process event')
+                print(line)
+                print()
+                continue
+
+            if N_leps == 3:
+                f_out.write(line)
+    
+                
+

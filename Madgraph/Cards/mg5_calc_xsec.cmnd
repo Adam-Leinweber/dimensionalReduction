@@ -1,0 +1,14 @@
+import model MSSM_SLHA2-full
+define x1 = x1+ x1-
+define x2 = x2+ x2-
+define p = p b b~
+define j = j b b~
+generate p p > x2+ x2- @ 0
+add process p p > x2+ x2- j @ 1
+add process p p > x2+ x2- j j @ 2
+launch
+Cards/-72.780252_151.95540427_1.05037597_-142.4636015_GAMBIT_param_card.dat
+Cards/run_card.dat
+
+
+

@@ -1,0 +1,15 @@
+import model MSSM_SLHA2-full
+define x1 = x1+ x1-
+define x2 = x2+ x2-
+define p = p b b~
+define j = j b b~
+generate p p > x1 n2 @ 0
+output Generate/75.04493878037125_97.06162228997495_16.06010287257269_-349.40676008403733/ppTOx1n2
+launch
+shower=pythia8
+detector=delphes
+Cards/75.04493878037125_97.06162228997495_16.06010287257269_-349.40676008403733_GAMBIT_param_card.dat
+Cards/run_card.dat
+Cards/pythia8_card.dat
+
+
